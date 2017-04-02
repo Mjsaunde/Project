@@ -1,4 +1,6 @@
 
 public class Passenger {
-int i = 0;
+String firstName = "";
+String lastName = "";
+Date birthday ;
 }

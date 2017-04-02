@@ -14,4 +14,5 @@ public Date(Integer d, Integer m, Integer y)
 	month = m;
 	year = y;
 }
+public Date(){}
 }

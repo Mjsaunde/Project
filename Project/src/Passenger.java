@@ -1,4 +1,4 @@
 
-public class Passanger {
-
+public class Passenger {
+int i = 0;
 }

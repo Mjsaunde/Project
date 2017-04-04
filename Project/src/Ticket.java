@@ -20,7 +20,7 @@ private Time flightTime;
 private Time flightDuration;
 
 /**
- * Constuctor for class Ticket
+ * Constructor for class Ticket
  * @param iD value for the unique ticket id of type Integer
  * @param pass value for the passenger for type Passenger
  * @param ticketprice value for the ticket price of type Double

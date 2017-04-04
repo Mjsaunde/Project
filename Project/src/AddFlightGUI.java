@@ -64,7 +64,7 @@ public class AddFlightGUI extends JFrame {
 		gC.gridx = 0;
 		gC.gridy = 0;
 		gC.gridwidth = 4;
-		pnlInput.add(new Label("Add Flight - Enter Flight Information:"),gC);
+		pnlInput.add(new Label("Add Flight - Please enter flight information:"),gC);
 		gC.gridx = 0;
 		gC.gridy = 1;
 		gC.gridwidth = 1;

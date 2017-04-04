@@ -9,8 +9,8 @@
 public class Ticket {
 private Integer id = 0;
 private Passenger passenger;
-private Double ticketPrice;
-private Double ticketTotalPrice;
+private Double ticketPrice = 0.0;
+private Double ticketTotalPrice = 0.0;
 private Double tax = 1.07;
 private Integer flightNumber = 0;
 private String flightSource = "";

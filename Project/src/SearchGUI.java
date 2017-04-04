@@ -64,12 +64,11 @@ public class SearchGUI extends JFrame {
 	}
 	
 	//main method for testing purposes:
+	/*
 	public static void main(String[] args)
 	{
 		JFrame f = new SearchGUI();
-	    f.setVisible(true);
-	    
-		
+	    f.setVisible(true);	
 	}
-	
+	*/
 }

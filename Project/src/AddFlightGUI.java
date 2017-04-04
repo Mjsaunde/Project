@@ -117,12 +117,11 @@ public class AddFlightGUI extends JFrame {
 	}
 	
 	//main method for testing purposes:
+	/*
 	public static void main(String[] args)
 	{
 		JFrame f = new AddFlightGUI();
 	    f.setVisible(true);
-	    
-		
 	}
-	
+	*/
 }

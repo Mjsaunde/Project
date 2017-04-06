@@ -1,10 +1,13 @@
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.*;
 
 /**
  * 
  * @author Brendon
- * 
+ * Stores a string array with search field and criteria
  */
 public class SearchGUI extends JFrame {
 
@@ -14,8 +17,9 @@ public class SearchGUI extends JFrame {
 	private static final long serialVersionUID = 1L;
 	JComboBox<String> boxSearchType;
 	JTextField txtSearchCrit;
-	JButton btnAddFlight;
+	JButton btnOk;
 	JButton btnCancel;
+	String[] strArray; //store search criteria
 	
 	Container c;
 	
@@ -24,8 +28,9 @@ public class SearchGUI extends JFrame {
 	{
 		boxSearchType  = new JComboBox<String>();
 		txtSearchCrit = new JTextField(10);
-		btnAddFlight = new JButton("Add Flight");
+		btnOk = new JButton("Search");
 		btnCancel = new JButton("Cancel");
+		strArray = new String[2];
 		JPanel pnlInput = new JPanel(new GridBagLayout());
 		JPanel pnlBtns = new JPanel();
 		GridBagConstraints gC = new GridBagConstraints();
@@ -51,7 +56,7 @@ public class SearchGUI extends JFrame {
 		pnlInput.add(txtSearchCrit,gC);
 
 		
-		pnlBtns.add(btnAddFlight);
+		pnlBtns.add(btnOk);
 		pnlBtns.add(btnCancel);
 		
 		c.add(pnlInput, BorderLayout.CENTER);
@@ -61,8 +66,31 @@ public class SearchGUI extends JFrame {
 		this.pack();
 		this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		
+		btnOk.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            	strArray[0] = boxSearchType.getSelectedItem().toString();
+            	strArray[1] = txtSearchCrit.getText();
+            	setVisible(false);
+            }
+        });
+		
+		btnCancel.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            	strArray = null;
+            	//close the window
+            	setVisible(false);
+            	dispose();
+            }
+        });
+		
 	}
 	
+	public String[] getQuery()
+	{
+		return strArray;
+	}
 	//main method for testing purposes:
 	/*
 	public static void main(String[] args)

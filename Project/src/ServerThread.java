@@ -41,17 +41,14 @@ public class ServerThread extends Thread{
 		try {
 			recieved = (Message) objectIn.readObject();
 		} catch (ClassNotFoundException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		} catch (IOException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		recieved.setString("bye");
 		try {
 			objectOut.writeObject(recieved);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		/*

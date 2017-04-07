@@ -38,30 +38,24 @@ public FlightCatalog search(String field, String Criteria)
 			{
 				flightCat.addFlight(tempF);
 			}
-			//TODO implement compare
 			break;
 		case "destination": 
 			if (tempF.getFlightDestination() == Criteria)
 			{
 				flightCat.addFlight(tempF);
 			}
-			//TODO implement compare
 			break;
 		case "flight number": 
 			if (tempF.getFlightNumber() == Integer.parseInt(Criteria))
 			{
 				flightCat.addFlight(tempF);
 			}
-			//TODO implement compare
 			break;
 		case "First Name": 
-			//TODO implement compare
 			break;
 		case "Last Name": 
-			//TODO implement compare
 			break;
 		case "Ticket ID": 
-			//TODO implement compare
 			break;
 		}
 		
@@ -72,7 +66,6 @@ public FlightCatalog search(String field, String Criteria)
 
 public void addFlight (Flight flight)
 {
-	//TODO add flight to database
 	flights.add(flight);
 }
 

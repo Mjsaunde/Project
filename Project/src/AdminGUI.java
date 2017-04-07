@@ -1,6 +1,15 @@
+import java.util.List;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.Arrays;
 import java.util.LinkedList;
 
 import javax.swing.*;
@@ -10,7 +19,7 @@ import javax.swing.*;
  * @author Brendon
  *
  */
-public class AdminGUI extends JFrame {
+public class AdminGUI extends JFrame implements GUI {
 
 	/**
 	 * 
@@ -33,12 +42,14 @@ public class AdminGUI extends JFrame {
 	ActionListener actionListener;
 	FlightCatalog flightCatalog;
 	JFrame search;
+	AdminGUI self;
 	
 	Container c;
 	
 	
 	public AdminGUI(FlightCatalog flightCatalog)
 	{
+		self = this;
 		this.flightCatalog = flightCatalog;
 		lstDisplay  = new JList<String>();
 		btnSearchF = new JButton("Search");
@@ -92,27 +103,31 @@ public class AdminGUI extends JFrame {
 		btnSearchF.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-            	strArray = new String[2];
-        		search = new SearchGUI(actionListener,0);
+            	//strArray = new String[2];
+        		search = new SearchGUI(self,0);
             	search.setVisible(true);
+            	/*
             	actionListener = new ActionListener() { //listens for ok button press
                     @Override
                     public void actionPerformed(ActionEvent e) {
                     	strArray = ((SearchGUI) search).getQuery();
+                    	System.out.print(strArray);
                     	//TODO Add search functionality here
                     	search.setVisible(false);
                     	search.dispose();
                     }
         		};
+        		*/
             }
         });
 		
 		btnSearchT.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-            	strArray = new String[2];
-        		search = new SearchGUI(actionListener,1); //ticket search has more search options
+            	//strArray = new String[2];
+        		search = new SearchGUI(self,1); //ticket search has more search options
             	search.setVisible(true);
+            	/*
             	actionListener = new ActionListener() { //listens for ok button press
                     @Override
                     public void actionPerformed(ActionEvent e) {
@@ -122,6 +137,7 @@ public class AdminGUI extends JFrame {
                     	search.dispose();
                     }
         		};
+        		*/
             }
         });
 		
@@ -154,26 +170,52 @@ public class AdminGUI extends JFrame {
 		btnFlightAdd.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-            	ActionListener actionListenerAdd = null;
-            	JFrame addFlight = new AddFlightGUI(actionListenerAdd);
+            	JFrame addFlight = new AddFlightGUI(self);
             	addFlight.setVisible(true);
-            	actionListenerAdd = new ActionListener() { //listens for ok button press
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                    	flightCatalog.addFlight(((AddFlightGUI) addFlight).getFlight());
-                    	addFlight.setVisible(false);
-                    	addFlight.dispose();
-                    }
-        		};
-        		
-            	
             }
         });
 		
 		btnFlightLoad.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-            	//TODO load flights from file
+            	//TODO Check for flight duplicates
+            	String fileName = JOptionPane.showInputDialog("Enter the file name:");
+            	File myFile = new File(fileName);
+            	try {
+					System.out.println("Attempting to read from file: "+myFile.getCanonicalPath());
+				} catch (IOException e2) {
+					e2.printStackTrace();
+				}
+            	InputStream is = AdminGUI.class.getResourceAsStream("/resources/"+fileName);
+            	System.out.println(is);
+            	try(BufferedReader br = new BufferedReader(new FileReader(fileName))) {
+            	    StringBuilder sb = new StringBuilder();
+            	    String line = br.readLine();
+            	    if (!line.startsWith("#"))
+            	    {
+            	    	List<String> items = Arrays.asList(line.split("\\s*,\\s*"));
+                	    Flight flight = new Flight(Integer.parseInt(items.get(0)),items.get(1),items.get(2),items.get(5),
+                	    		items.get(6),items.get(7),items.get(4),items.get(3));
+            	        flightCatalog.addFlight(flight);
+            	    }
+
+            	    while (line != null) {
+            	        sb.append(line);
+            	        sb.append(System.lineSeparator());
+            	        line = br.readLine();
+            	        if (line != null && !line.startsWith("#"))
+            	        {
+	            	        List<String> items = Arrays.asList(line.split("\\s*,\\s*"));
+	                	    Flight flight = new Flight(Integer.parseInt(items.get(0)),items.get(1),items.get(2),items.get(5),
+	                	    		items.get(6),items.get(7),items.get(4),items.get(3));
+	            	        flightCatalog.addFlight(flight);
+            	        }
+            	    }
+            	} catch (FileNotFoundException e1) {
+					e1.printStackTrace();
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
             }
         });
 		
@@ -213,8 +255,11 @@ public class AdminGUI extends JFrame {
 	
 	private void printToDisplayF()
 	{
+		//TODO change to JTable?
+		String strTitle = String.format("%10s %15s %15s %10s %10s %10s %3s %7s","Flight Num", "Source", "Destination", "Date", "Time", "Duration", "Seats Avail", "Price");
 		DefaultListModel<String> lstModel = new DefaultListModel<String>();
 		LinkedList<Flight> flights = flightCatalog.getFlights();
+		lstModel.addElement(strTitle);
 		for (int i = 0; i < flights.size(); i++)
 		{
 			lstModel.addElement(flights.get(i).toString());
@@ -239,6 +284,16 @@ public class AdminGUI extends JFrame {
 		lstDisplay.setModel(lstModel);
 	}
 	
+	public void searchCriteria(String[] strArray)
+	{
+		this.strArray = strArray;
+	}
+	
+	public void flightAdd(Flight flight)
+	{
+		flightCatalog.addFlight(flight);
+    	System.out.println(flight.toString());
+	}
 	//main method for testing purposes:
 	/*
 	public static void main(String[] args)

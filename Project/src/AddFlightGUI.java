@@ -37,7 +37,7 @@ public class AddFlightGUI extends JFrame {
 	Container c;
 	
 	
-	public AddFlightGUI(ActionListener actionListenerAdd)
+	public AddFlightGUI(AdminGUI adminGUI)
 	{
 		txtFlightDate = new JTextField(10);
 		txtFlightTime = new JTextField(10);
@@ -139,15 +139,16 @@ public class AddFlightGUI extends JFrame {
 		this.pack();
 		this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		
-		btnAddFlight.addActionListener(actionListenerAdd);
-		/*
+		//btnAddFlight.addActionListener(actionListenerAdd);
+		
 		btnAddFlight.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+            	adminGUI.flightAdd(getFlight());
             	//TODO add flight to database
             }
         });
-		*/
+		
 		btnCancel.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

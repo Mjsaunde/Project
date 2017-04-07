@@ -14,9 +14,8 @@ Socket socket;
 	public void start() throws IOException, ClassNotFoundException{
 		ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
 		ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
-		Message message = (Message)in.readObject();
-		message.result();
-		out.writeObject(message);
+		FlightCatalog flightcatalog = new FlightCatalog();
+		out.writeObject(flightcatalog);
 		socket.close();
 	}
 

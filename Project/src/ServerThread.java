@@ -6,16 +6,18 @@ import java.net.Socket;
 
 public class ServerThread {
 Socket socket;
-	public ServerThread(Socket aSocket){
+FlightCatalog flightcatalog;
+	public ServerThread(Socket aSocket, FlightCatalog flightcatalog){
 			this.socket = aSocket;
+			this.flightcatalog = flightcatalog;
 	}
 	
 	
 	public void start() throws IOException, ClassNotFoundException{
 		ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
 		ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
-		FlightCatalog flightcatalog = new FlightCatalog();
 		out.writeObject(flightcatalog);
+		flightcatalog = (FlightCatalog)in.readObject();
 		socket.close();
 	}
 

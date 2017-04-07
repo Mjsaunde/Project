@@ -8,7 +8,8 @@ public class Server {
  public int port = 4444;
  
 	public static void main(String[] args) throws IOException, ClassNotFoundException {
-		new Server().runServer();
+		Server server = new Server();
+		server.runServer();
 	}
 	
 	public void runServer() throws IOException, ClassNotFoundException{
@@ -16,7 +17,8 @@ public class Server {
 		System.out.println("Server is running...");
 		while(true){
 		Socket socket = serverSocket.accept();
-		new ServerThread(socket).start();
+		FlightCatalog flightcatalog = new FlightCatalog();
+		new ServerThread(socket, flightcatalog).start();
 		}
 	}
 

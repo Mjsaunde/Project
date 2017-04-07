@@ -1,4 +1,7 @@
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.*;
 
 /**
@@ -114,6 +117,21 @@ public class AddFlightGUI extends JFrame {
 		this.pack();
 		this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		
+		btnAddFlight.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            	//TODO add flight to database
+            }
+        });
+		
+		btnCancel.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            	//close the window
+            	setVisible(false);
+            	dispose();
+            }
+        });
 	}
 	
 	//main method for testing purposes:

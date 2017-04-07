@@ -231,6 +231,8 @@ public class AdminGUI extends JFrame implements GUI {
             		String selected = lstDisplay.getSelectedValue();
 	            	Flight flight = null;
 	            	//TODO select Flight object to pass into FlightGUI
+	            	System.out.println(selected);
+	            	flight = flightCatalog.getFlights().get(Integer.parseInt(selected));
 	            	JFrame flightData = new FlightGUI(flight);
 	            	flightData.setVisible(true);
             	}

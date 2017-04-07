@@ -46,7 +46,7 @@ public class FlightGUI extends JFrame {
 	Container c;
 	
 	
-	public FlightGUI(Flight flight)
+	public FlightGUI(GUI obj, Flight flight)
 	{
 		this.flight = flight;
 		txtFlightDate = new JTextField(10);
@@ -86,6 +86,8 @@ public class FlightGUI extends JFrame {
 		txtFlightDest.setEditable(false);
 		txtFlightNum.setEditable(false);
 		txtFlightDur.setEditable(false);
+		txtFlightPrice.setEditable(false);
+		txtFlightAvail.setEditable(false);
 		
 		lblFlightDate.setLabelFor(txtFlightDate);
 		lblFlightTime.setLabelFor(txtFlightTime);
@@ -185,7 +187,7 @@ public class FlightGUI extends JFrame {
 		c.add(pnlInput, BorderLayout.CENTER);
 		c.add(pnlBtns, BorderLayout.SOUTH);
 		c.setBounds(getBounds());
-		this.setPreferredSize(new Dimension(400, 250));
+		this.setPreferredSize(new Dimension(450, 300));
 		this.pack();
 		this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		populateData();
@@ -194,6 +196,8 @@ public class FlightGUI extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
         		//TODO to add, needs to check out booking so multiple people can not book the flight
+            	Passenger pass = new Passenger(txtPassName.getText(),txtPassLName.getText(),new Date(txtPassBday.getText()));
+            	obj.bookFlight(pass,flight);
             }
         });
 		

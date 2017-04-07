@@ -36,9 +36,9 @@ public class Time {
 	public Time(String strTime)
 	{
 		Integer offset = strTime.indexOf(':');
-		hour = Integer.parseInt(strTime.substring(0,offset-1));
-		minute = Integer.parseInt(strTime.substring(offset+1,offset+2));
-		second = Integer.parseInt(strTime.substring(offset+4,offset+5));
+		hour = Integer.parseInt(strTime.substring(0,offset));
+		minute = Integer.parseInt(strTime.substring(offset+2,offset+3));
+		second = Integer.parseInt(strTime.substring(offset+5,offset+6));
 	}
 	
 	/**
@@ -107,6 +107,6 @@ public class Time {
 	
 	public String toString()
 	{
-		return String.format("%2d:%2d:%2d", hour, minute, second);
+		return String.format("%02d:%02d:%02d", hour, minute, second);
 	}
 }

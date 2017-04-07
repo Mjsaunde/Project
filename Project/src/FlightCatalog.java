@@ -33,16 +33,28 @@ public FlightCatalog search(String field, String Criteria)
 		case "date": 
 			if (tempF.getFlightDate().equals(Criteria))
 			{
-				
+				flightCat.addFlight(tempF);
 			}
 			break;
 		case "source": 
+			if (tempF.getFlightSource() == Criteria)
+			{
+				flightCat.addFlight(tempF);
+			}
 			//TODO implement compare
 			break;
 		case "destination": 
+			if (tempF.getFlightDestination() == Criteria)
+			{
+				flightCat.addFlight(tempF);
+			}
 			//TODO implement compare
 			break;
 		case "flight number": 
+			if (tempF.getFlightNumber() == Integer.parseInt(Criteria))
+			{
+				flightCat.addFlight(tempF);
+			}
 			//TODO implement compare
 			break;
 		case "First Name": 
@@ -79,6 +91,18 @@ public LinkedList<Flight> getFlights() {
  */
 public void setFlights(LinkedList<Flight> flights) {
 	this.flights = flights;
+}
+
+public void cancelTicket(Ticket obj)
+{
+	for (int i = 0; i < flights.size(); i++)
+	{
+		if(obj.getFlightNumber() == flights.get(i).getFlightNumber())
+		{
+			flights.get(i).getTicketArray().remove(obj);
+			break;
+		}
+	}
 }
 
 }

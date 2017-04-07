@@ -10,7 +10,7 @@ import javax.swing.*;
  * @author Brendon
  *
  */
-public class PassengerGUI extends JFrame{
+public class PassengerGUI extends JFrame implements GUI{
 
 	/**
 	 * 
@@ -22,12 +22,14 @@ public class PassengerGUI extends JFrame{
 	String[] strArray; //store search criteria
 	ActionListener actionListener;
 	FlightCatalog flightCatalog;
+	PassengerGUI self;
 	
 	Container c;
 	
 	
 	public PassengerGUI(FlightCatalog flightCatalog)
 	{
+		self = this;
 		this.flightCatalog = flightCatalog;
 		lstDisplay  = new JList<String>();
 		btnSearch = new JButton("Search Flights");
@@ -57,7 +59,7 @@ public class PassengerGUI extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
             	strArray = new String[2];
-            	JFrame search = new SearchGUI(actionListener,0);
+            	JFrame search = new SearchGUI(self,0);
             	search.setVisible(true);
             	
             	actionListener = new ActionListener() { //listens for ok button press

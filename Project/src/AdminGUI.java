@@ -7,8 +7,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.LinkedList;
 
@@ -75,7 +73,7 @@ public class AdminGUI extends JFrame implements GUI {
 		//lstDisplay.setSize(400,400);
 		lstDisplay.setBackground(Color.WHITE);
 		JScrollPane lstDisplayScroll = new JScrollPane(lstDisplay);
-		lstDisplayScroll.setPreferredSize(new Dimension(400,480));
+		lstDisplayScroll.setPreferredSize(new Dimension(500,480));
 		
 		pnlBtns.add(btnFlightMgr);
 		pnlBtns.add(btnTicketMgr);
@@ -101,7 +99,7 @@ public class AdminGUI extends JFrame implements GUI {
 		//c.add(pnlTicket, BorderLayout.SOUTH);
 		c.add(pnlBottom, BorderLayout.SOUTH);
 		c.setBounds(getBounds());
-		this.setPreferredSize(new Dimension(600, 600));
+		this.setPreferredSize(new Dimension(700, 600));
 		this.pack();
 		this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		flightsDisplayed = flightCatalog.getFlights();

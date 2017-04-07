@@ -33,26 +33,32 @@ public FlightCatalog search(String field, String Criteria)
 		case "date": 
 			if (tempF.getFlightDate().equals(Criteria))
 			{
-				
+				flightCat.addFlight(tempF);
 			}
 			break;
 		case "source": 
-			//TODO implement compare
+			if (tempF.getFlightSource() == Criteria)
+			{
+				flightCat.addFlight(tempF);
+			}
 			break;
 		case "destination": 
-			//TODO implement compare
+			if (tempF.getFlightDestination() == Criteria)
+			{
+				flightCat.addFlight(tempF);
+			}
 			break;
 		case "flight number": 
-			//TODO implement compare
+			if (tempF.getFlightNumber() == Integer.parseInt(Criteria))
+			{
+				flightCat.addFlight(tempF);
+			}
 			break;
 		case "First Name": 
-			//TODO implement compare
 			break;
 		case "Last Name": 
-			//TODO implement compare
 			break;
 		case "Ticket ID": 
-			//TODO implement compare
 			break;
 		}
 		
@@ -63,7 +69,6 @@ public FlightCatalog search(String field, String Criteria)
 
 public void addFlight (Flight flight)
 {
-	//TODO add flight to database
 	flights.add(flight);
 }
 
@@ -79,6 +84,18 @@ public LinkedList<Flight> getFlights() {
  */
 public void setFlights(LinkedList<Flight> flights) {
 	this.flights = flights;
+}
+
+public void cancelTicket(Ticket obj)
+{
+	for (int i = 0; i < flights.size(); i++)
+	{
+		if(obj.getFlightNumber() == flights.get(i).getFlightNumber())
+		{
+			flights.get(i).getTicketArray().remove(obj);
+			break;
+		}
+	}
 }
 
 }

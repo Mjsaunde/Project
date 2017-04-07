@@ -155,7 +155,7 @@ public boolean equals(String str)
 
 public String toString()
 {
-	return (year.toString() + "/" + month.toString() + "/" + day.toString());
+	return String.format("%4d%02d%02d", year, month, day);
 }
 
 }

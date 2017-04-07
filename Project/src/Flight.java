@@ -63,11 +63,15 @@ public Flight(Integer flightNumber, String flightSource, String flightDestinatio
 	this.flightDate = new Date(flightDate);
 }
 
-//TODO create count seats function
+public Integer updateSeats(Integer flightNum)
+{
+	flightSeatsAvailible = flightSeatsTotal - ticketArray.size();
+	return flightSeatsAvailible;
+}
 
 public String toString()
 {
-	String str = String.format("%10s %17s %17s %20s %10s %10s %10s %15s",flightNumber, flightSource, flightDestination, flightDate, flightTime, flightDuration, flightSeatsAvailible, flightPrice);
+	String str = String.format("%10s %17s %17s %20s %10s %10s %10s %15.2f",flightNumber, flightSource, flightDestination, flightDate, flightTime, flightDuration, flightSeatsAvailible, flightPrice);
 	return str;
 }
 

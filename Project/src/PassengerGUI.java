@@ -1,6 +1,7 @@
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.LinkedList;
 
 import javax.swing.*;
 
@@ -20,13 +21,14 @@ public class PassengerGUI extends JFrame{
 	JButton btnFlightData; //to book flight
 	String[] strArray; //store search criteria
 	ActionListener actionListener;
-	//FlightCatalog flightCatalog;
+	FlightCatalog flightCatalog;
 	
 	Container c;
 	
 	
-	public PassengerGUI()
+	public PassengerGUI(FlightCatalog flightCatalog)
 	{
+		this.flightCatalog = flightCatalog;
 		lstDisplay  = new JList<String>();
 		btnSearch = new JButton("Search Flights");
 		btnFlightData = new JButton("Flight Data");
@@ -93,22 +95,22 @@ public class PassengerGUI extends JFrame{
 	private void printToDisplay()
 	{
 		DefaultListModel<String> lstModel = new DefaultListModel<String>();
-		
-		for (int i = 0; i < 10; i++)
+		LinkedList<Flight> flights = flightCatalog.getFlights();
+		for (int i = 0; i < flights.size(); i++)
 		{
-			lstModel.addElement("test "+ i);
+			lstModel.addElement(flights.get(i).toString());
 		}
 		
 		lstDisplay.setModel(lstModel);
 	}
 	
 	//main method for testing purposes:
-	
+/*	
 	public static void main(String[] args)
 	{
 		JFrame f = new PassengerGUI();
 	    f.setVisible(true);	
 	}
-
+*/
 	
 }

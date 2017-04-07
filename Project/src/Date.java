@@ -43,6 +43,17 @@ public Date(Integer d, Integer m, Integer y)
 }
 
 /**
+ * parse date from string
+ * @param strDate
+ */
+public Date(String strDate)
+{
+	year = Integer.parseInt(strDate.substring(0, 4));
+	month = Integer.parseInt(strDate.substring(5,6));
+	day = Integer.parseInt(strDate.substring(7,8));
+}
+
+/**
  * empty constructor for date
  * Defaults to January 1, 2017
  */
@@ -140,6 +151,11 @@ public boolean equals(String str)
 	{
 		return false;
 	}
+}
+
+public String toString()
+{
+	return (year.toString() + "/" + month.toString() + "/" + day.toString());
 }
 
 }

@@ -21,19 +21,23 @@ public class AddFlightGUI extends JFrame {
 	JTextField txtFlightDest;
 	JTextField txtFlightNum;
 	JTextField txtFlightDur;
+	JTextField txtFlightSeats;
+	JTextField txtFlightPrice;
 	JLabel lblFlightDate;
 	JLabel lblFlightTime;
 	JLabel lblFlightSrc;
 	JLabel lblFlightDest;
 	JLabel lblFlightNum;
 	JLabel lblFlightDur;
+	JLabel lblFlightSeats;
+	JLabel lblFlightPrice;
 	JButton btnAddFlight;
 	JButton btnCancel;
 	
 	Container c;
 	
 	
-	public AddFlightGUI()
+	public AddFlightGUI(ActionListener actionListenerAdd)
 	{
 		txtFlightDate = new JTextField(10);
 		txtFlightTime = new JTextField(10);
@@ -41,12 +45,16 @@ public class AddFlightGUI extends JFrame {
 		txtFlightDest = new JTextField(10);
 		txtFlightNum = new JTextField(10);
 		txtFlightDur = new JTextField(10);
+		txtFlightSeats = new JTextField(10);
+		txtFlightPrice = new JTextField(10);
 		lblFlightDate = new JLabel(" Date:");
 		lblFlightTime = new JLabel(" Time:");
 		lblFlightSrc = new JLabel(" Source:");
 		lblFlightDest = new JLabel(" Destination:");
 		lblFlightNum = new JLabel(" Number:");
 		lblFlightDur = new JLabel(" Duration:");
+		lblFlightSeats = new JLabel(" Seats:");
+		lblFlightPrice = new JLabel(" Price:");
 		btnAddFlight = new JButton("Add Flight");
 		btnCancel = new JButton("Cancel");
 		JPanel pnlInput = new JPanel(new GridBagLayout());
@@ -63,6 +71,8 @@ public class AddFlightGUI extends JFrame {
 		lblFlightDest.setLabelFor(txtFlightDest);
 		lblFlightNum.setLabelFor(txtFlightNum);
 		lblFlightDur.setLabelFor(txtFlightDur);
+		lblFlightSeats.setLabelFor(txtFlightSeats);
+		lblFlightPrice.setLabelFor(txtFlightPrice);
 		
 		gC.gridx = 0;
 		gC.gridy = 0;
@@ -105,6 +115,18 @@ public class AddFlightGUI extends JFrame {
 		gC.gridx = 3;
 		gC.gridy = 3;
 		pnlInput.add(txtFlightDur,gC);
+		gC.gridx = 0;
+		gC.gridy = 4;
+		pnlInput.add(lblFlightSeats, gC);
+		gC.gridx = 1;
+		gC.gridy = 4;
+		pnlInput.add(txtFlightSeats, gC);
+		gC.gridx = 2;
+		gC.gridy = 4;
+		pnlInput.add(lblFlightPrice, gC);
+		gC.gridx = 3;
+		gC.gridy = 4;
+		pnlInput.add(txtFlightPrice, gC);
 
 		
 		pnlBtns.add(btnAddFlight);
@@ -117,13 +139,15 @@ public class AddFlightGUI extends JFrame {
 		this.pack();
 		this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		
+		btnAddFlight.addActionListener(actionListenerAdd);
+		/*
 		btnAddFlight.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
             	//TODO add flight to database
             }
         });
-		
+		*/
 		btnCancel.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -132,6 +156,15 @@ public class AddFlightGUI extends JFrame {
             	dispose();
             }
         });
+	}
+	
+	public Flight getFlight()
+	{
+		Flight flight = new Flight(Integer.parseInt(txtFlightNum.getText()), txtFlightSrc.getText(), 
+				txtFlightDest.getText(), txtFlightDur.getText(), txtFlightSeats.getText(), 
+				txtFlightPrice.getText(), txtFlightTime.getText(), txtFlightDate.getText());
+		
+		return flight;
 	}
 	
 	//main method for testing purposes:

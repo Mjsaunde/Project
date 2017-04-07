@@ -20,6 +20,7 @@ public class PassengerGUI extends JFrame{
 	JButton btnFlightData; //to book flight
 	String[] strArray; //store search criteria
 	ActionListener actionListener;
+	//FlightCatalog flightCatalog;
 	
 	Container c;
 	
@@ -47,7 +48,7 @@ public class PassengerGUI extends JFrame{
 		this.setPreferredSize(new Dimension(600, 600));
 		this.pack();
 		this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-		
+		printToDisplay();
 		
 		
 		btnSearch.addActionListener(new ActionListener() {
@@ -89,6 +90,17 @@ public class PassengerGUI extends JFrame{
 		
 	}
 	
+	private void printToDisplay()
+	{
+		DefaultListModel<String> lstModel = new DefaultListModel<String>();
+		
+		for (int i = 0; i < 10; i++)
+		{
+			lstModel.addElement("test "+ i);
+		}
+		
+		lstDisplay.setModel(lstModel);
+	}
 	
 	//main method for testing purposes:
 	

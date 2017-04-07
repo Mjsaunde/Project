@@ -1,6 +1,5 @@
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 
 import javax.swing.*;
 
@@ -32,7 +31,7 @@ public class SearchGUI extends JFrame {
 	public SearchGUI(ActionListener actionListener, int mode)
 	{
 		boxSearchType  = new JComboBox<String>();
-		txtSearchCrit = new JTextField(10);
+		txtSearchCrit = new JTextField("YYYYMMDD",10);
 		btnOk = new JButton("Search");
 		btnCancel = new JButton("Cancel");
 		strArray = new String[2];
@@ -88,6 +87,19 @@ public class SearchGUI extends JFrame {
             	dispose();
             }
         });
+		
+		txtSearchCrit.addMouseListener(new MouseAdapter()
+	    {
+	        public void mouseClicked(MouseEvent e)
+	        {
+	            if(txtSearchCrit.getText().equals("YYYYMMDD"))
+	            {
+	            	txtSearchCrit.setText("");
+	                repaint();
+	                revalidate();
+	            }           
+	        }
+	    });
 		
 	}
 	

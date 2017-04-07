@@ -128,4 +128,18 @@ public Integer getYear()
 	return year;
 }
 
+public boolean equals(String str)
+{
+	String strCurrent1 =  (year.toString() + "/" + month.toString() + "/" + day.toString());
+	String strCurrent2 = (year.toString() + month.toString() + day.toString());
+	if (str == strCurrent1 || str == strCurrent2)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
 }

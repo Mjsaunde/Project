@@ -24,7 +24,8 @@ public class SearchGUI extends JFrame {
 	Container c;
 	
 	
-	public SearchGUI()
+	
+	public SearchGUI(ActionListener actionListener)
 	{
 		boxSearchType  = new JComboBox<String>();
 		txtSearchCrit = new JTextField(10);
@@ -66,14 +67,7 @@ public class SearchGUI extends JFrame {
 		this.pack();
 		this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		
-		btnOk.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-            	strArray[0] = boxSearchType.getSelectedItem().toString();
-            	strArray[1] = txtSearchCrit.getText();
-            	setVisible(false);
-            }
-        });
+		btnOk.addActionListener(actionListener);
 		
 		btnCancel.addActionListener(new ActionListener() {
             @Override
@@ -89,6 +83,9 @@ public class SearchGUI extends JFrame {
 	
 	public String[] getQuery()
 	{
+		strArray[0] = boxSearchType.getSelectedItem().toString();
+    	strArray[1] = txtSearchCrit.getText();
+    	setVisible(false);
 		return strArray;
 	}
 	//main method for testing purposes:

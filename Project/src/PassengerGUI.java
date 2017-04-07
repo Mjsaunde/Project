@@ -9,7 +9,7 @@ import javax.swing.*;
  * @author Brendon
  *
  */
-public class PassengerGUI extends JFrame {
+public class PassengerGUI extends JFrame{
 
 	/**
 	 * 
@@ -18,7 +18,8 @@ public class PassengerGUI extends JFrame {
 	JList<String> lstDisplay;
 	JButton btnSearch;
 	JButton btnFlightData; //to book flight
-	
+	String[] strArray; //store search criteria
+	ActionListener actionListener;
 	
 	Container c;
 	
@@ -26,7 +27,7 @@ public class PassengerGUI extends JFrame {
 	public PassengerGUI()
 	{
 		lstDisplay  = new JList<String>();
-		btnSearch = new JButton("Add Flight");
+		btnSearch = new JButton("Search Flights");
 		btnFlightData = new JButton("Flight Data");
 		JPanel pnlBtns = new JPanel();
 		c = getContentPane();
@@ -38,6 +39,8 @@ public class PassengerGUI extends JFrame {
 		pnlBtns.add(btnSearch);
 		pnlBtns.add(btnFlightData);
 		
+		
+		
 		c.add(lstDisplayScroll, BorderLayout.NORTH);
 		c.add(pnlBtns, BorderLayout.CENTER);
 		c.setBounds(getBounds());
@@ -45,10 +48,22 @@ public class PassengerGUI extends JFrame {
 		this.pack();
 		this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		
+		
+		
 		btnSearch.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+            	strArray = new String[2];
+            	JFrame search = new SearchGUI(actionListener);
+            	search.setVisible(true);
             	
+            	actionListener = new ActionListener() { //listens for ok button press
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                    	strArray = ((SearchGUI) search).getQuery();
+                    	
+                    }
+        		};
             }
         });
 		
@@ -61,6 +76,7 @@ public class PassengerGUI extends JFrame {
 		
 	}
 	
+	
 	//main method for testing purposes:
 	
 	public static void main(String[] args)
@@ -68,5 +84,6 @@ public class PassengerGUI extends JFrame {
 		JFrame f = new PassengerGUI();
 	    f.setVisible(true);	
 	}
+
 	
 }

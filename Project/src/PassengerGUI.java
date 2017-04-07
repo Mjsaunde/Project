@@ -39,6 +39,7 @@ public class PassengerGUI extends JFrame implements GUI{
 		lstDisplay  = new JList<String>();
 		btnSearch = new JButton("Search Flights");
 		btnFlightData = new JButton("Flight Data");
+		btnRefresh = new JButton("Refresh");
 		JPanel pnlBtns = new JPanel();
 		c = getContentPane();
 		//lstDisplay.setSize(400,400);
@@ -46,6 +47,7 @@ public class PassengerGUI extends JFrame implements GUI{
 		JScrollPane lstDisplayScroll = new JScrollPane(lstDisplay);
 		lstDisplayScroll.setPreferredSize(new Dimension(400,450));
 		
+		pnlBtns.add(btnRefresh);
 		pnlBtns.add(btnSearch);
 		pnlBtns.add(btnFlightData);
 		

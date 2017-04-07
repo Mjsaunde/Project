@@ -145,7 +145,6 @@ public class AddFlightGUI extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
             	adminGUI.flightAdd(getFlight());
-            	//TODO add flight to database
             }
         });
 		

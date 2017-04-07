@@ -5,13 +5,13 @@ import javax.swing.JFrame;
  * @author Brendon
  *
  */
-public class TempClientSocket {
+public class TempAdminSocket {
 	FlightCatalog flightCat;
 	
-	TempClientSocket()
+	TempAdminSocket()
 	{
 		flightCat = new FlightCatalog();
-		JFrame f = new PassengerGUI(flightCat);
+		JFrame f = new AdminGUI(flightCat);
 		f.setVisible(true);
 	}
 	
@@ -19,7 +19,7 @@ public class TempClientSocket {
 	
 	public static void main(String[] args)
 	{
-		TempClientSocket t = new TempClientSocket();
+		TempAdminSocket t = new TempAdminSocket();
 		
 	}
 	

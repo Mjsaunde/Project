@@ -106,6 +106,11 @@ public class PassengerGUI extends JFrame implements GUI{
 		lstDisplay.setModel(lstModel);
 	}
 	
+	public void searchCriteria(String[] strArray)
+	{
+		this.strArray = strArray;
+	}
+	
 	//main method for testing purposes:
 /*	
 	public static void main(String[] args)

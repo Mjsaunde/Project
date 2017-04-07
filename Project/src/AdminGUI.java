@@ -42,7 +42,12 @@ public class AdminGUI extends JFrame implements GUI {
 	ActionListener actionListener;
 	FlightCatalog flightCatalog;
 	JFrame search;
+	JFrame addFlight;
+	JFrame flightData;
+	JPanel pnlTicket;
+	JPanel pnlFlight;
 	AdminGUI self;
+	LinkedList<Flight> flightsDisplayed;
 	
 	Container c;
 	
@@ -51,6 +56,7 @@ public class AdminGUI extends JFrame implements GUI {
 	{
 		self = this;
 		this.flightCatalog = flightCatalog;
+		flightsDisplayed = flightCatalog.getFlights();
 		lstDisplay  = new JList<String>();
 		btnSearchF = new JButton("Search");
 		btnSearchT = new JButton("Search");
@@ -63,8 +69,8 @@ public class AdminGUI extends JFrame implements GUI {
 		btnRefreshF = new JButton("Refresh Flights");
 		btnRefreshT = new JButton("Refresh Tickets");
 		JPanel pnlBtns = new JPanel();
-		JPanel pnlTicket = new JPanel(); //ticket manager
-		JPanel pnlFlight = new JPanel(); //flight manager
+		pnlTicket = new JPanel(); //ticket manager
+		pnlFlight = new JPanel(); //flight manager
 		c = getContentPane();
 		//lstDisplay.setSize(400,400);
 		lstDisplay.setBackground(Color.WHITE);
@@ -75,7 +81,7 @@ public class AdminGUI extends JFrame implements GUI {
 		pnlBtns.add(btnTicketMgr);
 		
 		pnlTicket.add(btnRefreshT);
-		pnlTicket.add(btnSearchT);
+		//pnlTicket.add(btnSearchT);
 		pnlTicket.add(btnTicketCancel);
 		
 		pnlFlight.add(btnRefreshF);
@@ -106,18 +112,6 @@ public class AdminGUI extends JFrame implements GUI {
             	//strArray = new String[2];
         		search = new SearchGUI(self,0);
             	search.setVisible(true);
-            	/*
-            	actionListener = new ActionListener() { //listens for ok button press
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                    	strArray = ((SearchGUI) search).getQuery();
-                    	System.out.print(strArray);
-                    	//TODO Add search functionality here
-                    	search.setVisible(false);
-                    	search.dispose();
-                    }
-        		};
-        		*/
             }
         });
 		
@@ -127,17 +121,6 @@ public class AdminGUI extends JFrame implements GUI {
             	//strArray = new String[2];
         		search = new SearchGUI(self,1); //ticket search has more search options
             	search.setVisible(true);
-            	/*
-            	actionListener = new ActionListener() { //listens for ok button press
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                    	strArray = ((SearchGUI) search).getQuery();
-                    	//TODO Add search functionality here
-                    	search.setVisible(false);
-                    	search.dispose();
-                    }
-        		};
-        		*/
             }
         });
 		
@@ -164,13 +147,29 @@ public class AdminGUI extends JFrame implements GUI {
             @Override
             public void actionPerformed(ActionEvent e) {
             	//TODO cancel ticket
+            	Ticket obj = null;
+            	int selected = lstDisplay.getSelectedIndex();
+            	int counter = 0;
+            	for (int i = 0; i < flightsDisplayed.size(); i++, counter++)
+        		{
+        			LinkedList<Ticket> tickets = flightsDisplayed.get(i).getTicketArray();
+        			for (int j = 0; j < tickets.size(); j++, counter++)
+        			{
+        				if (counter == selected)
+        				{
+        				obj = tickets.get(j);
+        				break;
+        				}
+        			}
+        		}
+            	flightCatalog.cancelTicket(obj);
             }
         });
 		
 		btnFlightAdd.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-            	JFrame addFlight = new AddFlightGUI(self);
+            	addFlight = new AddFlightGUI(self);
             	addFlight.setVisible(true);
             }
         });
@@ -186,8 +185,8 @@ public class AdminGUI extends JFrame implements GUI {
 				} catch (IOException e2) {
 					e2.printStackTrace();
 				}
-            	InputStream is = AdminGUI.class.getResourceAsStream("/resources/"+fileName);
-            	System.out.println(is);
+            	while(true)
+            	{
             	try(BufferedReader br = new BufferedReader(new FileReader(fileName))) {
             	    StringBuilder sb = new StringBuilder();
             	    String line = br.readLine();
@@ -211,11 +210,13 @@ public class AdminGUI extends JFrame implements GUI {
 	            	        flightCatalog.addFlight(flight);
             	        }
             	    }
+            	    break;
             	} catch (FileNotFoundException e1) {
-					e1.printStackTrace();
+            		fileName = JOptionPane.showInputDialog("File name invalid, please re-enter the file name:");
 				} catch (IOException e1) {
 					e1.printStackTrace();
 				}
+            	}
             }
         });
 		
@@ -228,12 +229,12 @@ public class AdminGUI extends JFrame implements GUI {
             	}
             	else
             	{
-            		String selected = lstDisplay.getSelectedValue();
+            		int selected = lstDisplay.getSelectedIndex();
 	            	Flight flight = null;
 	            	//TODO select Flight object to pass into FlightGUI
 	            	System.out.println(selected);
-	            	flight = flightCatalog.getFlights().get(Integer.parseInt(selected));
-	            	JFrame flightData = new FlightGUI(flight);
+	            	flight = flightCatalog.getFlights().get(selected);
+	            	flightData = new FlightGUI(self, flight);
 	            	flightData.setVisible(true);
             	}
             }
@@ -260,11 +261,11 @@ public class AdminGUI extends JFrame implements GUI {
 		//TODO change to JTable?
 		String strTitle = String.format("%10s %15s %15s %10s %10s %10s %3s %7s","Flight Num", "Source", "Destination", "Date", "Time", "Duration", "Seats Avail", "Price");
 		DefaultListModel<String> lstModel = new DefaultListModel<String>();
-		LinkedList<Flight> flights = flightCatalog.getFlights();
+		//LinkedList<Flight> flights = flightCatalog.getFlights();
 		lstModel.addElement(strTitle);
-		for (int i = 0; i < flights.size(); i++)
+		for (int i = 0; i < flightsDisplayed.size(); i++)
 		{
-			lstModel.addElement(flights.get(i).toString());
+			lstModel.addElement(flightsDisplayed.get(i).toString());
 		}
 		
 		lstDisplay.setModel(lstModel);
@@ -273,10 +274,10 @@ public class AdminGUI extends JFrame implements GUI {
 	private void printToDisplayT()
 	{
 		DefaultListModel<String> lstModel = new DefaultListModel<String>();
-		LinkedList<Flight> flights = flightCatalog.getFlights();
-		for (int i = 0; i < flights.size(); i++)
+		//LinkedList<Flight> flights = flightCatalog.getFlights();
+		for (int i = 0; i < flightsDisplayed.size(); i++)
 		{
-			LinkedList<Flight> tickets = flightCatalog.getFlights();
+			LinkedList<Ticket> tickets = flightsDisplayed.get(i).getTicketArray();
 			for (int j = 0; j < tickets.size(); j++)
 			{
 				lstModel.addElement(tickets.get(j).toString());
@@ -289,12 +290,30 @@ public class AdminGUI extends JFrame implements GUI {
 	public void searchCriteria(String[] strArray)
 	{
 		this.strArray = strArray;
+		search.setVisible(false);
+		search.dispose();
+		if (pnlFlight.isVisible())
+		{
+			flightsDisplayed = flightCatalog.search(strArray[0], strArray[1]);
+			printToDisplayF();
+		}
+		else
+		{
+			//TODO ticket search here
+		}
 	}
 	
 	public void flightAdd(Flight flight)
 	{
 		flightCatalog.addFlight(flight);
     	System.out.println(flight.toString());
+    	addFlight.setVisible(false);
+    	addFlight.dispose();
+	}
+	
+	public void bookFlight(Passenger pass,Flight flight)
+	{
+		//TODO book flight
 	}
 	//main method for testing purposes:
 	/*

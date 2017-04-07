@@ -41,12 +41,14 @@ public class FlightGUI extends JFrame {
 	JLabel lblFlightPrice;
 	JButton btnFlightBook;
 	JButton btnCancel;
+	Flight flight;
 	
 	Container c;
 	
 	
 	public FlightGUI(Flight flight)
 	{
+		this.flight = flight;
 		txtFlightDate = new JTextField(10);
 		txtFlightTime = new JTextField(10);
 		txtFlightSrc = new JTextField(10);
@@ -55,6 +57,8 @@ public class FlightGUI extends JFrame {
 		txtFlightDur = new JTextField(10);
 		txtPassName = new JTextField(10);
 		txtPassLName = new JTextField(10);
+		txtFlightPrice = new JTextField(10);
+		txtFlightAvail = new JTextField(10);
 		txtPassBday = new JTextField("YYYYMMDD",10);
 		lblFlightDate = new JLabel(" Date:");
 		lblFlightTime = new JLabel(" Time:");
@@ -65,6 +69,8 @@ public class FlightGUI extends JFrame {
 		lblPassName = new JLabel(" First Name:");
 		lblPassLName = new JLabel(" Last Name:");
 		lblPassBday = new JLabel(" Date of Birth:");
+		lblFlightAvail = new JLabel(" Available Seats:");
+		lblFlightPrice = new JLabel(" Price:");
 		btnFlightBook = new JButton("Book Flight");
 		btnCancel = new JButton("Cancel");
 		JPanel pnlInput = new JPanel(new GridBagLayout());
@@ -143,7 +149,7 @@ public class FlightGUI extends JFrame {
 		pnlInput.add(lblFlightPrice,gC);
 		gC.gridx = 3;
 		gC.gridy = 4;
-		pnlInput.add(txtFlighPrice,gC);
+		pnlInput.add(txtFlightPrice,gC);
 		gC.insets = new Insets(20,0,0,0);
 		gC.gridx = 1;
 		gC.gridy = 6;
@@ -182,6 +188,7 @@ public class FlightGUI extends JFrame {
 		this.setPreferredSize(new Dimension(400, 250));
 		this.pack();
 		this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		populateData();
 		
 		btnFlightBook.addActionListener(new ActionListener() {
             @Override
@@ -213,6 +220,17 @@ public class FlightGUI extends JFrame {
 	    });
 	}
 	
+	private void populateData()
+	{
+		txtFlightDate.setText(flight.getFlightDate().toString());
+		txtFlightTime.setText(flight.getFlightTime().toString());
+		txtFlightSrc.setText(flight.getFlightSource());
+		txtFlightDest.setText(flight.getFlightDestination());
+		txtFlightNum.setText(flight.getFlightNumber().toString());
+		txtFlightDur.setText(flight.getFlightDuration().toString());
+		txtFlightPrice.setText(flight.getFlightPrice().toString());
+		txtFlightAvail.setText(flight.getFlightSeatsAvailible().toString());
+	}
 	
 	
 	//main method for testing purposes:

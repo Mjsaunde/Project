@@ -104,6 +104,7 @@ public class AdminGUI extends JFrame implements GUI {
 		this.setPreferredSize(new Dimension(600, 600));
 		this.pack();
 		this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		flightsDisplayed = flightCatalog.getFlights();
 		printToDisplayF();
 		
 		btnSearchF.addActionListener(new ActionListener() {
@@ -294,7 +295,7 @@ public class AdminGUI extends JFrame implements GUI {
 		search.dispose();
 		if (pnlFlight.isVisible())
 		{
-			flightsDisplayed = flightCatalog.search(strArray[0], strArray[1]);
+			flightsDisplayed = (flightCatalog.search(strArray[0], strArray[1])).getFlights();
 			printToDisplayF();
 		}
 		else

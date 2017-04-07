@@ -26,22 +26,22 @@ public FlightCatalog search(String field, String Criteria)
 			tempF.getFlightDate().equals(Criteria);
 			break;
 		case "source": 
-			
+			//TODO implement compare
 			break;
 		case "destination": 
-			
+			//TODO implement compare
 			break;
 		case "flight number": 
-			
+			//TODO implement compare
 			break;
 		case "First Name": 
-			
+			//TODO implement compare
 			break;
 		case "Last Name": 
-			
+			//TODO implement compare
 			break;
 		case "Ticket ID": 
-			
+			//TODO implement compare
 			break;
 		}
 		
@@ -49,5 +49,21 @@ public FlightCatalog search(String field, String Criteria)
 	
 	return flightCat;
 }
+
+/**
+ * @return the flights
+ */
+public LinkedList<Flight> getFlights() {
+	return flights;
+}
+
+/**
+ * @param flights the flights to set
+ */
+public void setFlights(LinkedList<Flight> flights) {
+	this.flights = flights;
+}
+
+
 
 }

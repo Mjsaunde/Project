@@ -26,6 +26,8 @@ public class FlightGUI extends JFrame {
 	JTextField txtPassName;
 	JTextField txtPassLName;
 	JTextField txtPassBday;
+	JTextField txtFlightAvail;
+	JTextField txtFlightPrice;
 	JLabel lblFlightDate;
 	JLabel lblFlightTime;
 	JLabel lblFlightSrc;
@@ -35,6 +37,8 @@ public class FlightGUI extends JFrame {
 	JLabel lblPassName;
 	JLabel lblPassLName;
 	JLabel lblPassBday;
+	JLabel lblFlightAvail;
+	JLabel lblFlightPrice;
 	JButton btnFlightBook;
 	JButton btnCancel;
 	
@@ -128,30 +132,42 @@ public class FlightGUI extends JFrame {
 		gC.gridx = 3;
 		gC.gridy = 3;
 		pnlInput.add(txtFlightDur,gC);
-		gC.insets = new Insets(20,0,0,0);
+		gC.gridx = 0;
+		gC.gridy = 4;
+		pnlInput.add(lblFlightAvail,gC);
 		gC.gridx = 1;
 		gC.gridy = 4;
+		pnlInput.add(txtFlightAvail,gC);
+		gC.gridx = 2;
+		gC.gridy = 4;
+		pnlInput.add(lblFlightPrice,gC);
+		gC.gridx = 3;
+		gC.gridy = 4;
+		pnlInput.add(txtFlighPrice,gC);
+		gC.insets = new Insets(20,0,0,0);
+		gC.gridx = 1;
+		gC.gridy = 6;
 		gC.gridwidth = 2;
 		pnlInput.add(new Label("Passenger Information:"),gC);
 		gC.insets = new Insets(0,0,0,0);
 		gC.gridx = 0;
-		gC.gridy = 5;
+		gC.gridy = 7;
 		gC.gridwidth = 1;
 		pnlInput.add(lblPassName,gC);
 		gC.gridx = 1;
-		gC.gridy = 5;
+		gC.gridy = 7;
 		pnlInput.add(txtPassName,gC);
 		gC.gridx = 2;
-		gC.gridy = 5;
+		gC.gridy = 7;
 		pnlInput.add(lblPassLName,gC);
 		gC.gridx = 3;
-		gC.gridy = 5;
+		gC.gridy = 7;
 		pnlInput.add(txtPassLName,gC);
 		gC.gridx = 0;
-		gC.gridy = 6;
+		gC.gridy = 8;
 		pnlInput.add(lblPassBday,gC);
 		gC.gridx = 1;
-		gC.gridy = 6;
+		gC.gridy = 8;
 		pnlInput.add(txtPassBday,gC);
 		//TODO add seats available
 		//TODO add price

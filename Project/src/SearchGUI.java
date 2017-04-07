@@ -28,7 +28,7 @@ public class SearchGUI extends JFrame {
 	 * @param actionListener
 	 * @param mode is 0 when used for flights, 1 when used for tickets
 	 */
-	public SearchGUI(ActionListener actionListener, int mode)
+	public SearchGUI(GUI obj, int mode)
 	{
 		boxSearchType  = new JComboBox<String>();
 		txtSearchCrit = new JTextField("YYYYMMDD",10);
@@ -76,7 +76,16 @@ public class SearchGUI extends JFrame {
 		this.pack();
 		this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		
-		btnOk.addActionListener(actionListener);
+		//btnOk.addActionListener(actionListener);
+		btnOk.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            	obj.searchCriteria(getQuery());
+            	//close the window
+            	setVisible(false);
+            	dispose();
+            }
+        });
 		
 		btnCancel.addActionListener(new ActionListener() {
             @Override

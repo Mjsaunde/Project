@@ -107,6 +107,6 @@ public class Time {
 	
 	public String toString()
 	{
-		return String.format("$s:$s:$s", hour, minute, second);
+		return String.format("%2d:%2d:%2d", hour, minute, second);
 	}
 }

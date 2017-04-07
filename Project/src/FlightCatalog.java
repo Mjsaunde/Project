@@ -58,13 +58,11 @@ public FlightCatalog search(String field, String Criteria)
 	return flightCat;
 }
 
-public String toString()
+public void addFlight (Flight flight)
 {
-	
+	//TODO add flight to database
+	flights.add(flight);
 }
-
-
-
 
 /**
  * @return the flights
@@ -79,7 +77,5 @@ public LinkedList<Flight> getFlights() {
 public void setFlights(LinkedList<Flight> flights) {
 	this.flights = flights;
 }
-
-
 
 }

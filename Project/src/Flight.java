@@ -1,3 +1,5 @@
+import java.util.LinkedList;
+
 /**
  * 
  * @author Mark
@@ -14,7 +16,7 @@ private Time flightDuration;
 private Integer flightSeatsAvailible = 0;
 private Integer flightSeatsTotal = 0;
 private Double flightPrice = 0.0;
-private Ticket[] ticketArray;
+private LinkedList<Ticket> ticketArray;
 private Time flightTime;
 private Date flightDate;
 
@@ -31,7 +33,7 @@ private Date flightDate;
  * @param flightDate
  */
 public Flight(Integer flightNumber, String flightSource, String flightDestination, Time flightDuration,
-		Integer flightSeatsAvailible, Integer flightSeatsTotal, Double flightPrice, Ticket[] ticketArray,
+		Integer flightSeatsAvailible, Integer flightSeatsTotal, Double flightPrice, LinkedList<Ticket> ticketArray,
 		Time flightTime, Date flightDate) {
 	super();
 	this.flightNumber = flightNumber;
@@ -45,6 +47,23 @@ public Flight(Integer flightNumber, String flightSource, String flightDestinatio
 	this.flightTime = flightTime;
 	this.flightDate = flightDate;
 }
+
+public Flight(Integer flightNumber, String flightSource, String flightDestination, String flightDuration,
+		String flightSeatsTotal, String flightPrice,
+		String flightTime, String flightDate) {
+	this.flightNumber = flightNumber;
+	this.flightSource = flightSource;
+	this.flightDestination = flightDestination;
+	this.flightDuration = new Time(flightDuration);
+	this.flightSeatsAvailible = Integer.parseInt(flightSeatsTotal);
+	this.flightSeatsTotal = Integer.parseInt(flightSeatsTotal);
+	this.flightPrice = Double.parseDouble(flightPrice);
+	ticketArray = new LinkedList<Ticket>();
+	this.flightTime = new Time(flightTime);
+	this.flightDate = new Date(flightDate);
+}
+
+//TODO create count seats function
 
 public String toString()
 {
@@ -97,7 +116,7 @@ public Double getFlightPrice() {
 /**
  * @return the ticketArray
  */
-public Ticket[] getTicketArray() {
+public LinkedList<Ticket> getTicketArray() {
 	return ticketArray;
 }
 /**
@@ -157,7 +176,7 @@ public void setFlightPrice(Double flightPrice) {
 /**
  * @param ticketArray the ticketArray to set
  */
-public void setTicketArray(Ticket[] ticketArray) {
+public void setTicketArray(LinkedList<Ticket> ticketArray) {
 	this.ticketArray = ticketArray;
 }
 /**

@@ -54,14 +54,16 @@ public class PassengerGUI extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
             	strArray = new String[2];
-            	JFrame search = new SearchGUI(actionListener);
+            	JFrame search = new SearchGUI(actionListener,0);
             	search.setVisible(true);
             	
             	actionListener = new ActionListener() { //listens for ok button press
                     @Override
                     public void actionPerformed(ActionEvent e) {
                     	strArray = ((SearchGUI) search).getQuery();
-                    	
+                    	//TODO Add search functionality here
+                    	search.setVisible(false);
+                    	search.dispose();
                     }
         		};
             }
@@ -70,7 +72,18 @@ public class PassengerGUI extends JFrame{
 		btnFlightData.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-            	
+            	if (lstDisplay.isSelectionEmpty())
+            	{
+            		JOptionPane.showMessageDialog(null,"Flight is not selected from list");
+            	}
+            	else
+            	{
+	            	String selected = lstDisplay.getSelectedValue();
+	            	Flight flight = null;
+	            	//TODO select Flight object to pass into FlightGUI
+	            	JFrame flightData = new FlightGUI(flight);
+	            	flightData.setVisible(true);
+            	}
             }
         });
 		

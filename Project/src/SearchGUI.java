@@ -24,8 +24,12 @@ public class SearchGUI extends JFrame {
 	Container c;
 	
 	
-	
-	public SearchGUI(ActionListener actionListener)
+	/**
+	 * 
+	 * @param actionListener
+	 * @param mode is 0 when used for flights, 1 when used for tickets
+	 */
+	public SearchGUI(ActionListener actionListener, int mode)
 	{
 		boxSearchType  = new JComboBox<String>();
 		txtSearchCrit = new JTextField(10);
@@ -41,7 +45,13 @@ public class SearchGUI extends JFrame {
 		boxSearchType.addItem("source");
 		boxSearchType.addItem("destination");
 		boxSearchType.addItem("flight number");
-		//any others?
+
+		if (mode == 1)
+		{
+			boxSearchType.addItem("First Name");
+			boxSearchType.addItem("Last Name");
+			boxSearchType.addItem("Ticket ID");
+		}
 		
 		gC.gridx = 0;
 		gC.gridy = 0;

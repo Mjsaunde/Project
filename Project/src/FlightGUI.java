@@ -177,8 +177,7 @@ public class FlightGUI extends JFrame {
 		gC.gridx = 1;
 		gC.gridy = 8;
 		pnlInput.add(txtPassBday,gC);
-		//TODO add seats available
-		//TODO add price
+
 		
 		
 		pnlBtns.add(btnFlightBook);

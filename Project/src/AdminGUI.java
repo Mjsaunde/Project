@@ -147,7 +147,6 @@ public class AdminGUI extends JFrame implements GUI {
 		btnTicketCancel.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-            	//TODO cancel ticket
             	Ticket obj = null;
             	int selected = lstDisplay.getSelectedIndex();
             	int counter = 0;

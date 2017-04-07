@@ -142,4 +142,9 @@ public boolean equals(String str)
 	}
 }
 
+public String toString()
+{
+	return (year.toString() + "/" + month.toString() + "/" + day.toString());
+}
+
 }

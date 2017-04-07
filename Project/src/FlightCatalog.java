@@ -13,6 +13,11 @@ public FlightCatalog()
 	flights = new LinkedList<Flight>();
 }
 
+public FlightCatalog(LinkedList<Flight> flights)
+{
+	this.flights = flights;
+}
+
 public FlightCatalog search(String field, String Criteria)
 {
 	FlightCatalog flightCat = new FlightCatalog();
@@ -23,7 +28,10 @@ public FlightCatalog search(String field, String Criteria)
 		switch(Criteria)
 		{
 		case "date": 
-			tempF.getFlightDate().equals(Criteria);
+			if (tempF.getFlightDate().equals(Criteria))
+			{
+				
+			}
 			break;
 		case "source": 
 			//TODO implement compare
@@ -49,6 +57,14 @@ public FlightCatalog search(String field, String Criteria)
 	
 	return flightCat;
 }
+
+public String toString()
+{
+	
+}
+
+
+
 
 /**
  * @return the flights

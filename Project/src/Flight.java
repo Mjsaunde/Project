@@ -45,6 +45,13 @@ public Flight(Integer flightNumber, String flightSource, String flightDestinatio
 	this.flightTime = flightTime;
 	this.flightDate = flightDate;
 }
+
+public String toString()
+{
+	String str = String.format("$10s $15s $15s $10s $10s $10s $3s $7s",flightNumber, flightSource, flightDestination, flightDate, flightTime, flightDuration, flightSeatsAvailible, flightPrice);
+	return str;
+}
+
 /**
  * @return the flightNumber
  */

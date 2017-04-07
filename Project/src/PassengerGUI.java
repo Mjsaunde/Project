@@ -20,7 +20,7 @@ public class PassengerGUI extends JFrame{
 	JButton btnFlightData; //to book flight
 	String[] strArray; //store search criteria
 	ActionListener actionListener;
-	//FlightCatalog flightCatalog;
+	FlightCatalog flightCatalog;
 	
 	Container c;
 	

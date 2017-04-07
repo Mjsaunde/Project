@@ -1,6 +1,8 @@
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.*;
 
@@ -49,7 +51,7 @@ public class FlightGUI extends JFrame {
 		txtFlightDur = new JTextField(10);
 		txtPassName = new JTextField(10);
 		txtPassLName = new JTextField(10);
-		txtPassBday = new JTextField(10);
+		txtPassBday = new JTextField("YYYYMMDD",10);
 		lblFlightDate = new JLabel(" Date:");
 		lblFlightTime = new JLabel(" Time:");
 		lblFlightSrc = new JLabel(" Source:");
@@ -151,6 +153,9 @@ public class FlightGUI extends JFrame {
 		gC.gridx = 1;
 		gC.gridy = 6;
 		pnlInput.add(txtPassBday,gC);
+		//TODO add seats available
+		//TODO add price
+		
 		
 		pnlBtns.add(btnFlightBook);
 		pnlBtns.add(btnCancel);
@@ -178,7 +183,18 @@ public class FlightGUI extends JFrame {
             }
         });
 		
-		
+		txtPassBday.addMouseListener(new MouseAdapter()
+	    {
+	        public void mouseClicked(MouseEvent e)
+	        {
+	            if(txtPassBday.getText().equals("YYYYMMDD"))
+	            {
+	            	txtPassBday.setText("");
+	                repaint();
+	                revalidate();
+	            }           
+	        }
+	    });
 	}
 	
 	

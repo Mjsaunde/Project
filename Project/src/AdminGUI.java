@@ -1,6 +1,7 @@
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.LinkedList;
 
 import javax.swing.*;
 
@@ -21,7 +22,8 @@ public class AdminGUI extends JFrame {
 	JButton btnSearchT;
 	JButton btnFlightMgr;
 	JButton btnTicketMgr;
-	
+	JButton btnRefreshF;
+	JButton btnRefreshT;
 	
 	JButton btnTicketCancel;
 	JButton btnTicketBook;
@@ -29,13 +31,15 @@ public class AdminGUI extends JFrame {
 	JButton btnFlightLoad;
 	String[] strArray; //store search criteria
 	ActionListener actionListener;
+	FlightCatalog flightCatalog;
 	JFrame search;
 	
 	Container c;
 	
 	
-	public AdminGUI()
+	public AdminGUI(FlightCatalog flightCatalog)
 	{
+		this.flightCatalog = flightCatalog;
 		lstDisplay  = new JList<String>();
 		btnSearchF = new JButton("Search");
 		btnSearchT = new JButton("Search");
@@ -45,6 +49,8 @@ public class AdminGUI extends JFrame {
 		btnTicketBook = new JButton("Book Ticket");
 		btnFlightAdd = new JButton("Add Flight");
 		btnFlightLoad = new JButton("Load flights from file");
+		btnRefreshF = new JButton("Refresh Flights");
+		btnRefreshT = new JButton("Refresh Tickets");
 		JPanel pnlBtns = new JPanel();
 		JPanel pnlTicket = new JPanel(); //ticket manager
 		JPanel pnlFlight = new JPanel(); //flight manager
@@ -57,9 +63,11 @@ public class AdminGUI extends JFrame {
 		pnlBtns.add(btnFlightMgr);
 		pnlBtns.add(btnTicketMgr);
 		
+		pnlTicket.add(btnRefreshT);
 		pnlTicket.add(btnSearchT);
 		pnlTicket.add(btnTicketCancel);
 		
+		pnlFlight.add(btnRefreshF);
 		pnlFlight.add(btnSearchF);
 		pnlFlight.add(btnFlightAdd);
 		pnlFlight.add(btnFlightLoad);
@@ -79,6 +87,7 @@ public class AdminGUI extends JFrame {
 		this.setPreferredSize(new Dimension(600, 600));
 		this.pack();
 		this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		printToDisplayF();
 		
 		btnSearchF.addActionListener(new ActionListener() {
             @Override
@@ -116,6 +125,8 @@ public class AdminGUI extends JFrame {
             }
         });
 		
+		
+		
 		btnFlightMgr.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -143,9 +154,19 @@ public class AdminGUI extends JFrame {
 		btnFlightAdd.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-            	//TODO add flight to database
-            	JFrame addFlight = new AddFlightGUI();
+            	ActionListener actionListenerAdd = null;
+            	JFrame addFlight = new AddFlightGUI(actionListenerAdd);
             	addFlight.setVisible(true);
+            	actionListenerAdd = new ActionListener() { //listens for ok button press
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                    	flightCatalog.addFlight(((AddFlightGUI) addFlight).getFlight());
+                    	addFlight.setVisible(false);
+                    	addFlight.dispose();
+                    }
+        		};
+        		
+            	
             }
         });
 		
@@ -174,14 +195,56 @@ public class AdminGUI extends JFrame {
             }
         });
 		
+		btnRefreshF.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            	printToDisplayF();
+            }
+        });
+		
+		btnRefreshT.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            	printToDisplayT();
+            }
+        });
+		
+	}
+	
+	private void printToDisplayF()
+	{
+		DefaultListModel<String> lstModel = new DefaultListModel<String>();
+		LinkedList<Flight> flights = flightCatalog.getFlights();
+		for (int i = 0; i < flights.size(); i++)
+		{
+			lstModel.addElement(flights.get(i).toString());
+		}
+		
+		lstDisplay.setModel(lstModel);
+	}
+	
+	private void printToDisplayT()
+	{
+		DefaultListModel<String> lstModel = new DefaultListModel<String>();
+		LinkedList<Flight> flights = flightCatalog.getFlights();
+		for (int i = 0; i < flights.size(); i++)
+		{
+			LinkedList<Flight> tickets = flightCatalog.getFlights();
+			for (int j = 0; j < tickets.size(); j++)
+			{
+				lstModel.addElement(tickets.get(j).toString());
+			}
+		}
+		
+		lstDisplay.setModel(lstModel);
 	}
 	
 	//main method for testing purposes:
-	
+	/*
 	public static void main(String[] args)
 	{
 		JFrame f = new AdminGUI();
 	    f.setVisible(true);	
 	}
-	
+	*/
 }

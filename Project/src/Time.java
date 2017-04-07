@@ -1,6 +1,7 @@
 /**
  * 
  * @author Mark
+ * @author Brendon
  * Class for time
  */
 public class Time {
@@ -27,6 +28,19 @@ public class Time {
 		else
 			System.out.println("You have entered an incorrect value for second. Try again.");
 	}
+	
+	/**
+	 * Parse time from string
+	 * @param strTime
+	 */
+	public Time(String strTime)
+	{
+		Integer offset = strTime.indexOf(':');
+		hour = Integer.parseInt(strTime.substring(0,offset-1));
+		minute = Integer.parseInt(strTime.substring(offset+1,offset+2));
+		second = Integer.parseInt(strTime.substring(offset+4,offset+5));
+	}
+	
 	/**
 	 * Default constructor
 	 */
@@ -89,5 +103,10 @@ public class Time {
 			second = Second;
 		else
 			System.out.println("You have entered an incorrect value for second. Try again.");
+	}
+	
+	public String toString()
+	{
+		return String.format("$s:$s:$s", hour, minute, second);
 	}
 }

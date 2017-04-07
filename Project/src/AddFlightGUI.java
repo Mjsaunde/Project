@@ -1,4 +1,7 @@
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.*;
 
 /**
@@ -64,7 +67,7 @@ public class AddFlightGUI extends JFrame {
 		gC.gridx = 0;
 		gC.gridy = 0;
 		gC.gridwidth = 4;
-		pnlInput.add(new Label("Add Flight - Enter Flight Information:"),gC);
+		pnlInput.add(new Label("Add Flight - Please enter flight information:"),gC);
 		gC.gridx = 0;
 		gC.gridy = 1;
 		gC.gridwidth = 1;
@@ -114,15 +117,29 @@ public class AddFlightGUI extends JFrame {
 		this.pack();
 		this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		
+		btnAddFlight.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            	//TODO add flight to database
+            }
+        });
+		
+		btnCancel.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            	//close the window
+            	setVisible(false);
+            	dispose();
+            }
+        });
 	}
 	
 	//main method for testing purposes:
+	/*
 	public static void main(String[] args)
 	{
 		JFrame f = new AddFlightGUI();
 	    f.setVisible(true);
-	    
-		
 	}
-	
+	*/
 }

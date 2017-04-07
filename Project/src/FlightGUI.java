@@ -1,4 +1,7 @@
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.*;
 
 /**
@@ -36,7 +39,7 @@ public class FlightGUI extends JFrame {
 	Container c;
 	
 	
-	public FlightGUI()
+	public FlightGUI(Flight flight)
 	{
 		txtFlightDate = new JTextField(10);
 		txtFlightTime = new JTextField(10);
@@ -65,6 +68,12 @@ public class FlightGUI extends JFrame {
         //gC.fill = GridBagConstraints.HORIZONTAL;
 		c = getContentPane();
 		
+		txtFlightDate.setEditable(false);
+		txtFlightTime.setEditable(false);
+		txtFlightSrc.setEditable(false);
+		txtFlightDest.setEditable(false);
+		txtFlightNum.setEditable(false);
+		txtFlightDur.setEditable(false);
 		
 		lblFlightDate.setLabelFor(txtFlightDate);
 		lblFlightTime.setLabelFor(txtFlightTime);
@@ -153,15 +162,33 @@ public class FlightGUI extends JFrame {
 		this.pack();
 		this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		
+		btnFlightBook.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+        		//TODO to add, needs to check out booking so multiple people can not book the flight
+            }
+        });
+		
+		btnCancel.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            	//close the window
+            	setVisible(false);
+            	dispose();
+            }
+        });
+		
+		
 	}
 	
+	
+	
 	//main method for testing purposes:
+	/*
 	public static void main(String[] args)
 	{
 		JFrame f = new FlightGUI();
 	    f.setVisible(true);
-	    
-		
 	}
-	
+	*/
 }

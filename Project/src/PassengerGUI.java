@@ -45,7 +45,7 @@ public class PassengerGUI extends JFrame implements GUI{
 		//lstDisplay.setSize(400,400);
 		lstDisplay.setBackground(Color.WHITE);
 		JScrollPane lstDisplayScroll = new JScrollPane(lstDisplay);
-		lstDisplayScroll.setPreferredSize(new Dimension(400,450));
+		lstDisplayScroll.setPreferredSize(new Dimension(500,450));
 		
 		pnlBtns.add(btnRefresh);
 		pnlBtns.add(btnSearch);
@@ -56,7 +56,7 @@ public class PassengerGUI extends JFrame implements GUI{
 		c.add(lstDisplayScroll, BorderLayout.NORTH);
 		c.add(pnlBtns, BorderLayout.CENTER);
 		c.setBounds(getBounds());
-		this.setPreferredSize(new Dimension(600, 600));
+		this.setPreferredSize(new Dimension(700, 600));
 		this.pack();
 		this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		flightsDisplayed = flightCatalog.getFlights();

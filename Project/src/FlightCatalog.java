@@ -1,3 +1,4 @@
+import java.io.Serializable;
 import java.util.LinkedList;
 
 /**
@@ -5,7 +6,9 @@ import java.util.LinkedList;
  * @author Brendon
  *
  */
-public class FlightCatalog {
+public class FlightCatalog implements Serializable{
+	private static final long serialVersionUID = 2544143993149409908L;
+
 LinkedList<Flight> flights;
 
 public FlightCatalog()

@@ -27,6 +27,7 @@ public class PassengerGUI extends JFrame implements GUI{
 	JFrame search;
 	JFrame flightData;
 	LinkedList<Flight> flightsDisplayed;
+
 	
 	Container c;
 	
@@ -65,6 +66,7 @@ public class PassengerGUI extends JFrame implements GUI{
             public void actionPerformed(ActionEvent e) {
             	strArray = new String[2];
             	search = new SearchGUI(self,0);
+
             	search.setVisible(true);
             	
             	actionListener = new ActionListener() { //listens for ok button press

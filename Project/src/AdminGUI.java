@@ -46,13 +46,15 @@ public class AdminGUI extends JFrame implements GUI {
 	JPanel pnlFlight;
 	AdminGUI self;
 	LinkedList<Flight> flightsDisplayed;
+	ClientAdmin client;
 	
 	Container c;
 	
 	
-	public AdminGUI(FlightCatalog flightCatalog)
+	public AdminGUI(ClientAdmin client, FlightCatalog flightCatalog)
 	{
 		self = this;
+		this.client = client;
 		this.flightCatalog = flightCatalog;
 		flightsDisplayed = flightCatalog.getFlights();
 		lstDisplay  = new JList<String>();
@@ -304,6 +306,7 @@ public class AdminGUI extends JFrame implements GUI {
 	public void flightAdd(Flight flight)
 	{
 		flightCatalog.addFlight(flight);
+		client.addFlight(flight);
     	System.out.println(flight.toString());
     	addFlight.setVisible(false);
     	addFlight.dispose();
@@ -311,6 +314,7 @@ public class AdminGUI extends JFrame implements GUI {
 	
 	public void bookFlight(Passenger pass,Flight flight)
 	{
+		boolean accepted = client.bookFlight(pass,flight);
 		//TODO book flight
 	}
 	//main method for testing purposes:

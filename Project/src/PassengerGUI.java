@@ -27,14 +27,16 @@ public class PassengerGUI extends JFrame implements GUI{
 	JFrame search;
 	JFrame flightData;
 	LinkedList<Flight> flightsDisplayed;
+	Client client;
 
 	
 	Container c;
 	
 	
-	public PassengerGUI(FlightCatalog flightCatalog)
+	public PassengerGUI(Client client,FlightCatalog flightCatalog)
 	{
 		self = this;
+		this.client = client;
 		this.flightCatalog = flightCatalog;
 		lstDisplay  = new JList<String>();
 		btnSearch = new JButton("Search Flights");
@@ -137,6 +139,7 @@ public class PassengerGUI extends JFrame implements GUI{
 	
 	public void bookFlight(Passenger pass,Flight flight)
 	{
+		boolean accepted = client.bookFlight(pass,flight);
 		//TODO book flight
 	}
 	//main method for testing purposes:

@@ -46,15 +46,15 @@ public class AdminGUI extends JFrame implements GUI {
 	JPanel pnlFlight;
 	AdminGUI self;
 	LinkedList<Flight> flightsDisplayed;
-	ClientAdmin client;
+	//ClientAdmin client;
 	
 	Container c;
 	
-	
-	public AdminGUI(ClientAdmin client, FlightCatalog flightCatalog)
+	//ClientAdmin client,
+	public AdminGUI( FlightCatalog flightCatalog)
 	{
 		self = this;
-		this.client = client;
+		//this.client = client;
 		this.flightCatalog = flightCatalog;
 		flightsDisplayed = flightCatalog.getFlights();
 		lstDisplay  = new JList<String>();
@@ -306,7 +306,7 @@ public class AdminGUI extends JFrame implements GUI {
 	public void flightAdd(Flight flight)
 	{
 		flightCatalog.addFlight(flight);
-		client.addFlight(flight);
+		//client.addFlight(flight);
     	System.out.println(flight.toString());
     	addFlight.setVisible(false);
     	addFlight.dispose();

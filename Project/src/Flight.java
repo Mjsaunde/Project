@@ -63,6 +63,21 @@ public Flight(Integer flightNumber, String flightSource, String flightDestinatio
 	this.flightDate = new Date(flightDate);
 }
 
+public Flight(Integer flightNumber, String flightSource, String flightDestination, String flightDuration,
+		String flightSeatsAvailible, String flightSeatsTotal, String flightPrice, LinkedList<Ticket> ticketArray,
+		String flightTime, String flightDate) {
+	this.flightNumber = flightNumber;
+	this.flightSource = flightSource;
+	this.flightDestination = flightDestination;
+	this.flightDuration = new Time(flightDuration);
+	this.flightSeatsAvailible = Integer.parseInt(flightSeatsAvailible);
+	this.flightSeatsTotal = Integer.parseInt(flightSeatsTotal);
+	this.flightPrice = Double.parseDouble(flightPrice);
+	ticketArray = new LinkedList<Ticket>();
+	this.flightTime = new Time(flightTime);
+	this.flightDate = new Date(flightDate);
+}
+
 public Integer updateSeats(Integer flightNum)
 {
 	flightSeatsAvailible = flightSeatsTotal - ticketArray.size();

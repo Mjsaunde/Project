@@ -47,6 +47,12 @@ public Ticket(Integer iD, Passenger pass, Double ticketprice, Integer
 	
 }
 
+public Ticket(Integer iD, String name, String lName, String bDay){
+	this.id = iD;
+	this.passenger = new Passenger(name, lName, new Date(bDay));
+	
+}
+
 /**
  * Default constructor for class Ticket
  */

@@ -6,7 +6,7 @@ import java.util.LinkedList;
 import javax.swing.*;
 
 /**
- * 
+ *  Passenger client GUI
  * @author Brendon
  *
  */
@@ -33,6 +33,11 @@ public class PassengerGUI extends JFrame implements GUI{
 	Container c;
 	
 	
+	/**
+	 * Constructs GUI and listens for button presses
+	 * @param client
+	 * @param flightCatalog
+	 */
 	public PassengerGUI(Client client,FlightCatalog flightCatalog)
 	{
 		self = this;
@@ -113,6 +118,9 @@ public class PassengerGUI extends JFrame implements GUI{
 		
 	}
 	
+	/**
+	 * prints flights to display
+	 */
 	private void printToDisplay()
 	{
 		//TODO change to JTable?
@@ -128,6 +136,9 @@ public class PassengerGUI extends JFrame implements GUI{
 		lstDisplay.setModel(lstModel);
 	}
 	
+	/* (non-Javadoc)
+	 * @see GUI#searchCriteria(java.lang.String[])
+	 */
 	public void searchCriteria(String[] strArray)
 	{
 		this.strArray = strArray;
@@ -137,6 +148,9 @@ public class PassengerGUI extends JFrame implements GUI{
 		printToDisplay();
 	}
 	
+	/* (non-Javadoc)
+	 * @see GUI#bookFlight(Passenger, Flight)
+	 */
 	public void bookFlight(Passenger pass,Flight flight)
 	{
 		boolean accepted = client.bookFlight(pass,flight);

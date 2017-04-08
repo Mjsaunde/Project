@@ -11,16 +11,27 @@ public class FlightCatalog implements Serializable{
 
 LinkedList<Flight> flights;
 
+/**
+ * default constructor
+ */
 public FlightCatalog()
 {
 	flights = new LinkedList<Flight>();
 }
 
+/**
+ * @param flights
+ */
 public FlightCatalog(LinkedList<Flight> flights)
 {
 	this.flights = flights;
 }
 
+/**
+ * @param field
+ * @param Criteria
+ * @return
+ */
 public FlightCatalog search(String field, String Criteria)
 {
 	FlightCatalog flightCat = new FlightCatalog();
@@ -67,6 +78,9 @@ public FlightCatalog search(String field, String Criteria)
 	return flightCat;
 }
 
+/**
+ * @param flight
+ */
 public void addFlight (Flight flight)
 {
 	flights.add(flight);
@@ -86,6 +100,9 @@ public void setFlights(LinkedList<Flight> flights) {
 	this.flights = flights;
 }
 
+/**
+ * @param obj
+ */
 public void cancelTicket(Ticket obj)
 {
 	for (int i = 0; i < flights.size(); i++)

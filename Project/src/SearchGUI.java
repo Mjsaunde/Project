@@ -112,6 +112,9 @@ public class SearchGUI extends JFrame {
 		
 	}
 	
+	/**
+	 * @return search query
+	 */
 	public String[] getQuery()
 	{
 		strArray[0] = boxSearchType.getSelectedItem().toString();

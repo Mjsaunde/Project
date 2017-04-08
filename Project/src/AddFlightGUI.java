@@ -5,15 +5,12 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 
 /**
- * 
+ * GUI to add flights
  * @author Brendon
  * 
  */
 public class AddFlightGUI extends JFrame {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	JTextField txtFlightDate;
 	JTextField txtFlightTime;
@@ -37,6 +34,10 @@ public class AddFlightGUI extends JFrame {
 	Container c;
 	
 	
+	/**
+	 * constructor for GUI includes listeners
+	 * @param adminGUI
+	 */
 	public AddFlightGUI(AdminGUI adminGUI)
 	{
 		txtFlightDate = new JTextField(10);
@@ -158,6 +159,10 @@ public class AddFlightGUI extends JFrame {
         });
 	}
 	
+	/**
+	 * gets flight inputed by user
+	 * @return flight
+	 */
 	public Flight getFlight()
 	{
 		Flight flight = new Flight(Integer.parseInt(txtFlightNum.getText()), txtFlightSrc.getText(), 

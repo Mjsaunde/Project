@@ -46,6 +46,11 @@ public class FlightGUI extends JFrame {
 	Container c;
 	
 	
+	/**
+	 * Constructor and listeners
+	 * @param obj
+	 * @param flight
+	 */
 	public FlightGUI(GUI obj, Flight flight)
 	{
 		this.flight = flight;
@@ -223,6 +228,9 @@ public class FlightGUI extends JFrame {
 	    });
 	}
 	
+	/**
+	 * 
+	 */
 	private void populateData()
 	{
 		txtFlightDate.setText(flight.getFlightDate().toString());

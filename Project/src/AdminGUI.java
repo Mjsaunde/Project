@@ -13,15 +13,13 @@ import java.util.LinkedList;
 import javax.swing.*;
 
 /**
- * 
+ * GUI for admin
  * @author Brendon
  *
  */
 public class AdminGUI extends JFrame implements GUI {
 
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 	JList<String> lstDisplay;
 	
@@ -51,6 +49,10 @@ public class AdminGUI extends JFrame implements GUI {
 	Container c;
 	
 	//ClientAdmin client,
+	/**
+	 * Constructor
+	 * @param flightCatalog
+	 */
 	public AdminGUI( FlightCatalog flightCatalog)
 	{
 		self = this;
@@ -256,6 +258,9 @@ public class AdminGUI extends JFrame implements GUI {
 		
 	}
 	
+	/**
+	 * Prints flights to JList
+	 */
 	private void printToDisplayF()
 	{
 		//TODO change to JTable?
@@ -271,6 +276,9 @@ public class AdminGUI extends JFrame implements GUI {
 		lstDisplay.setModel(lstModel);
 	}
 	
+	/**
+	 * Prints tickets to JList
+	 */
 	private void printToDisplayT()
 	{
 		DefaultListModel<String> lstModel = new DefaultListModel<String>();
@@ -287,6 +295,9 @@ public class AdminGUI extends JFrame implements GUI {
 		lstDisplay.setModel(lstModel);
 	}
 	
+	/* (non-Javadoc)
+	 * @see GUI#searchCriteria(java.lang.String[])
+	 */
 	public void searchCriteria(String[] strArray)
 	{
 		this.strArray = strArray;
@@ -303,6 +314,10 @@ public class AdminGUI extends JFrame implements GUI {
 		}
 	}
 	
+	/**
+	 * adds flight to catalog and sends to sever
+	 * @param flight
+	 */
 	public void flightAdd(Flight flight)
 	{
 		flightCatalog.addFlight(flight);
@@ -312,11 +327,15 @@ public class AdminGUI extends JFrame implements GUI {
     	addFlight.dispose();
 	}
 	
+	/* (non-Javadoc)
+	 * @see GUI#bookFlight(Passenger, Flight)
+	 */
 	public void bookFlight(Passenger pass,Flight flight)
 	{
 		boolean accepted = client.bookFlight(pass,flight);
 		//TODO book flight
 	}
+	
 	//main method for testing purposes:
 	/*
 	public static void main(String[] args)

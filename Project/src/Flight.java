@@ -8,6 +8,10 @@ import java.util.LinkedList;
  * source, destination, and duration, along with available
  * seats, total seats, ticket price, flight time and date.
  */
+/**
+ * @author Brendon
+ *
+ */
 public class Flight {
 private Integer flightNumber = 0;
 private String flightSource = "";
@@ -48,6 +52,17 @@ public Flight(Integer flightNumber, String flightSource, String flightDestinatio
 	this.flightDate = flightDate;
 }
 
+
+/**
+ * @param flightNumber
+ * @param flightSource
+ * @param flightDestination
+ * @param flightDuration
+ * @param flightSeatsTotal
+ * @param flightPrice
+ * @param flightTime
+ * @param flightDate
+ */
 public Flight(Integer flightNumber, String flightSource, String flightDestination, String flightDuration,
 		String flightSeatsTotal, String flightPrice,
 		String flightTime, String flightDate) {
@@ -63,6 +78,18 @@ public Flight(Integer flightNumber, String flightSource, String flightDestinatio
 	this.flightDate = new Date(flightDate);
 }
 
+/**
+ * @param flightNumber
+ * @param flightSource
+ * @param flightDestination
+ * @param flightDuration
+ * @param flightSeatsAvailible
+ * @param flightSeatsTotal
+ * @param flightPrice
+ * @param ticketArray
+ * @param flightTime
+ * @param flightDate
+ */
 public Flight(Integer flightNumber, String flightSource, String flightDestination, String flightDuration,
 		String flightSeatsAvailible, String flightSeatsTotal, String flightPrice, LinkedList<Ticket> ticketArray,
 		String flightTime, String flightDate) {
@@ -78,12 +105,19 @@ public Flight(Integer flightNumber, String flightSource, String flightDestinatio
 	this.flightDate = new Date(flightDate);
 }
 
+/**
+ * @param flightNum
+ * @return
+ */
 public Integer updateSeats(Integer flightNum)
 {
 	flightSeatsAvailible = flightSeatsTotal - ticketArray.size();
 	return flightSeatsAvailible;
 }
 
+/* (non-Javadoc)
+ * @see java.lang.Object#toString()
+ */
 public String toString()
 {
 	String str = String.format("%10s %17s %17s %20s %10s %10s %10s %15.2f",flightNumber, flightSource, flightDestination, flightDate, flightTime, flightDuration, flightSeatsAvailible, flightPrice);

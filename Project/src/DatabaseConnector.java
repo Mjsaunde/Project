@@ -6,6 +6,11 @@ import com.mysql.jdbc.*;
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.Statement;
 
+/**
+ * Connects to database and gets/updates values stored there
+ * @author Brendon
+ *
+ */
 public class DatabaseConnector {
 
 	String userName = "root";
@@ -15,6 +20,11 @@ public class DatabaseConnector {
 	String dbms = "mysql";
 	String portNumber = "3306";
 	
+	/**
+	 * Starts connection to database
+	 * @return
+	 * @throws SQLException
+	 */
 	public Connection getConnection() throws SQLException {
 
 	    Connection conn = null;
@@ -39,17 +49,46 @@ public class DatabaseConnector {
 	    return conn;
 	}
 	
+	/**
+	 * updates values in database
+	 * @param flight
+	 */
 	public void updateDatabase(LinkedList<Flight> flight)
 	{
+		ResultSet rs = null;
+		ResultSet rsT = null;
+        Connection connection = null;
+        Statement statement = null; 
+        
+        String query = "SELECT * FROM flights";
+        try {           
+            connection = getConnection();
+            statement = (Statement) connection.createStatement();
+            rs = statement.executeQuery(query);
+		} catch (SQLException e) {
+	        e.printStackTrace();
+	    }
 		for (int i = 0; i < flight.size(); i++)
 		{
+			
 			for (int j = 0; j < flight.size(); j++)
 			{
-				
+				//TODO update database
 			}
 		}
+		if (connection != null) {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
 	}
 	
+	/**
+	 * gets values from database
+	 * @return
+	 */
 	public LinkedList<Flight> getDatabase()
 	{
 		LinkedList<Flight> flights = new LinkedList<Flight>();
